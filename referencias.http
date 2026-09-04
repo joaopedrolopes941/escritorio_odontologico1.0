@@ -1,0 +1,2 @@
+### Teste de Health Check
+GET http://localhost:3000/
