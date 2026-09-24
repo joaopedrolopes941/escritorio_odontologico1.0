@@ -1,2 +1,54 @@
 ### Teste de Health Check
 GET http://localhost:3000/
+
+### Login
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "email": "joao@gmail.com",
+    "senha": "123456"
+}
+
+### Listar dentistas
+GET http://localhost:3000/dentistas
+
+### Cadastrar dentista
+POST http://localhost:3000/dentistas
+Content-Type: application/json
+
+{
+    "nome": "Dr. Novo Dentista",
+    "email": "novo@odontologia.com",
+    "senha": "123456"
+}
+
+### Buscar dentista
+GET http://localhost:3000/dentistas/buscar?termo=Carlos
+
+### Cadastrar cliente
+POST http://localhost:3000/clientes
+Content-Type: application/json
+
+{
+    "nome": "João Pedro",
+    "email": "joaopedro@gmail.com",
+    "senha": "123456",
+    "cpf": "12345678901",
+    "id_dentista": 1
+}
+
+### Listar consultas
+GET http://localhost:3000/consultas
+
+### Cadastrar consulta
+POST http://localhost:3000/consultas
+Content-Type: application/json
+
+{
+    "tipo": "avaliação",
+    "descricao": "Avaliação odontológica",
+    "data_consulta": "2026-10-01 09:00:00",
+    "id_dentista": 1,
+    "id_cliente": 1
+}
