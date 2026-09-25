@@ -8,7 +8,7 @@ const sql = new Pool({
     password: "senai",
     host: "localhost",
     port: 5432,
-    database: "escritorio_odontologico1.0"
+    database: "escritorio_odontologico"
 })
 
 const servidor = Fastify()
@@ -17,18 +17,9 @@ servidor.register(cors, {
     origin: '*'
 })
 
-// ==================================================
-// HEALTH CHECK
-// ==================================================
-
 servidor.get('/', async () => {
     return 'Olá! A API do consultório está funcionando.'
 })
-
-
-// ==================================================
-// LOGIN
-// ==================================================
 
 servidor.post('/login', async (request, reply) => {
     const body = request.body
@@ -65,11 +56,6 @@ servidor.post('/login', async (request, reply) => {
     })
 })
 
-
-// ==================================================
-// DENTISTAS - LISTAR
-// ==================================================
-
 servidor.get('/dentistas', async (request, reply) => {
     const resultado = await sql.query(`
         SELECT * FROM dentista
@@ -78,11 +64,6 @@ servidor.get('/dentistas', async (request, reply) => {
 
     return resultado.rows
 })
-
-
-// ==================================================
-// DENTISTAS - BUSCAR
-// ==================================================
 
 servidor.get('/dentistas/buscar', async (request, reply) => {
     const { termo } = request.query
@@ -102,11 +83,6 @@ servidor.get('/dentistas/buscar', async (request, reply) => {
 
     return resultado.rows
 })
-
-
-// ==================================================
-// DENTISTAS - CADASTRAR
-// ==================================================
 
 servidor.post('/dentistas', async (request, reply) => {
     const body = request.body
@@ -128,11 +104,6 @@ servidor.post('/dentistas', async (request, reply) => {
         dentista: resultado.rows[0]
     })
 })
-
-
-// ==================================================
-// DENTISTAS - ATUALIZAR
-// ==================================================
 
 servidor.put('/dentistas/:id', async (request, reply) => {
     const body = request.body
@@ -174,11 +145,6 @@ servidor.put('/dentistas/:id', async (request, reply) => {
     })
 })
 
-
-// ==================================================
-// DENTISTAS - EXCLUIR
-// ==================================================
-
 servidor.delete('/dentistas/:id', async (request, reply) => {
     const id = request.params.id
 
@@ -204,11 +170,6 @@ servidor.delete('/dentistas/:id', async (request, reply) => {
     })
 })
 
-
-// ==================================================
-// CLIENTES - LISTAR
-// ==================================================
-
 servidor.get('/clientes', async (request, reply) => {
     const resultado = await sql.query(`
         SELECT
@@ -226,11 +187,6 @@ servidor.get('/clientes', async (request, reply) => {
 
     return resultado.rows
 })
-
-
-// ==================================================
-// CLIENTES - CADASTRAR
-// ==================================================
 
 servidor.post('/clientes', async (request, reply) => {
     const body = request.body
@@ -260,11 +216,6 @@ servidor.post('/clientes', async (request, reply) => {
         cliente: resultado.rows[0]
     })
 })
-
-
-// ==================================================
-// CLIENTES - ATUALIZAR
-// ==================================================
 
 servidor.put('/clientes/:id', async (request, reply) => {
     const body = request.body
@@ -316,11 +267,6 @@ servidor.put('/clientes/:id', async (request, reply) => {
     })
 })
 
-
-// ==================================================
-// CLIENTES - EXCLUIR
-// ==================================================
-
 servidor.delete('/clientes/:id', async (request, reply) => {
     const id = request.params.id
 
@@ -345,11 +291,6 @@ servidor.delete('/clientes/:id', async (request, reply) => {
         message: "CLIENTE DELETADO"
     })
 })
-
-
-// ==================================================
-// CONSULTAS - LISTAR
-// ==================================================
 
 servidor.get('/consultas', async (request, reply) => {
     const resultado = await sql.query(`
@@ -381,11 +322,7 @@ servidor.get('/consultas', async (request, reply) => {
 
     return resultado.rows
 })
-
-
-// ==================================================
-// CONSULTAS - CADASTRAR
-// ==================================================
+==
 
 servidor.post('/consultas', async (request, reply) => {
     const body = request.body
@@ -416,11 +353,6 @@ servidor.post('/consultas', async (request, reply) => {
         consulta: resultado.rows[0]
     })
 })
-
-
-// ==================================================
-// CONSULTAS - ATUALIZAR
-// ==================================================
 
 servidor.put('/consultas/:id', async (request, reply) => {
     const body = request.body
@@ -473,11 +405,6 @@ servidor.put('/consultas/:id', async (request, reply) => {
     })
 })
 
-
-// ==================================================
-// CONSULTAS - EXCLUIR
-// ==================================================
-
 servidor.delete('/consultas/:id', async (request, reply) => {
     const id = request.params.id
 
@@ -502,11 +429,6 @@ servidor.delete('/consultas/:id', async (request, reply) => {
         message: "CONSULTA DELETADA"
     })
 })
-
-
-// ==================================================
-// INICIAR SERVIDOR
-// ==================================================
 
 try {
     await servidor.listen({
